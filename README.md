@@ -1,3 +1,16 @@
+Still under development.
+
+
+
+
+
+
+
+
+
+
+Default installation
+
 # NPWD App for QB Garages. Requires NPWD 1.5.0 or higher.
 
 ## Make sure to have the newest version of `qb-garages`.
