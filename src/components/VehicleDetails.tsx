@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GarageItem } from '../types/garage';
 import {
   Button,
@@ -17,11 +17,20 @@ import { ServerPromiseResp } from '../types/common';
 import fetchNui from '../utils/fetchNui';
 
 const VehicleDetails = ({ veh }: { veh: GarageItem }) => {
-
   const handleTrackVehicle = (plate: string) => {
     fetchNui<ServerPromiseResp>('npwd:qb-garage:requestWaypoint', { plate }).then((res) => {
       console.log(res.data);
     });
+  };
+
+  const handleValetVehicle = (vehicle: GarageItem, citizenid: string, event: any) => {
+    event.target.style.display = 'none';
+    console.log(event.target.style);
+    fetchNui<ServerPromiseResp>('npwd:qb-garage:valetVehicle', { vehicle, citizenid }).then(
+      (res) => {
+        console.log(res.data);
+      },
+    );
   };
 
   return (
@@ -67,9 +76,18 @@ const VehicleDetails = ({ veh }: { veh: GarageItem }) => {
         variant="contained"
         disabled={veh.state !== 'out'}
         onClick={() => handleTrackVehicle(veh.plate)}
-        style={{ color: '#FFFFFF', backgroundColor: '#212121' }}
+        style={{ color: '#FFFFFF', backgroundColor: '#212121', margin: '5px' }}
       >
-        Track
+        GPS
+      </Button>
+      <Button
+        color="primary"
+        variant="contained"
+        disabled={veh.state == 'out'}
+        onClick={(e) => handleValetVehicle(veh, veh.citizenid, e)}
+        style={{ color: '#FFFFFF', backgroundColor: '#212121', margin: '5px' }}
+      >
+        Vale
       </Button>
     </>
   );
