@@ -18,7 +18,7 @@ import fetchNui from '../utils/fetchNui';
 
 const VehicleDetails = ({ veh }: { veh: GarageItem }) => {
   const handleTrackVehicle = (plate: string) => {
-    fetchNui<ServerPromiseResp>('npwd:qb-garage:requestWaypoint', { plate }).then((res) => {
+    fetchNui<ServerPromiseResp>('npwd:midofey-garage:requestWaypoint', { plate }).then((res) => {
       console.log(res.data);
     });
   };
@@ -26,7 +26,7 @@ const VehicleDetails = ({ veh }: { veh: GarageItem }) => {
   const handleValetVehicle = (vehicle: GarageItem, citizenid: string, event: any) => {
     event.target.style.display = 'none';
     console.log(event.target.style);
-    fetchNui<ServerPromiseResp>('npwd:qb-garage:valetVehicle', { vehicle, citizenid }).then(
+    fetchNui<ServerPromiseResp>('npwd:midofey-garage:valetVehicle', { vehicle, citizenid }).then(
       (res) => {
         console.log(res.data);
       },

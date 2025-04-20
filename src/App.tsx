@@ -47,7 +47,7 @@ const App = (props: AppProps) => {
 
   useEffect(() => {
     fetchNui<ServerPromiseResp<GarageItem[]>>(
-      'npwd:qb-garage:getVehicles',
+      'npwd:midofey-garage:getVehicles',
       null,
       buildRespObj(MockGarage),
     ).then((resp) => {
@@ -85,7 +85,7 @@ const App = (props: AppProps) => {
 };
 
 const WithProviders: React.FC<AppProps> = (props) => (
-  <RecoilRoot override key="npwd_qb_garage">
+  <RecoilRoot override key="npwd_midofey_garage">
     <App {...props} />
   </RecoilRoot>
 );
