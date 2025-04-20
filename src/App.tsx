@@ -56,13 +56,12 @@ const App = (props: AppProps) => {
   }, []);
 
   useEffect(() => {
-    if (vehicles) {
-      const mappedVehicles = vehicles?.reduce((vehs: any, vehicle: any) => {
-        vehs[vehicle.type] = [];
+    if (vehicles && Array.isArray(vehicles)) {
+      const mappedVehicles = vehicles.reduce((vehs: any, vehicle: any) => {
+        if (!vehs[vehicle.type]) vehs[vehicle.type] = [];
         vehs[vehicle.type].push(vehicle);
         return vehs;
       }, {});
-
       setMappedVeh(mappedVehicles);
     }
   }, [vehicles]);

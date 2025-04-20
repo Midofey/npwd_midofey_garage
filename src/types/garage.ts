@@ -1,10 +1,10 @@
 export interface GarageItem {
   body: number;
   engine: number;
-  citizenid: string;
+  owner: string;
   fuel: number;
   garage: string;
-  hash: string;
+  hash: number;
   plate: string;
   state: 'out' | 'garaged' | 'impounded' | 'seized' | 'unknown';
   vehicle: string;
