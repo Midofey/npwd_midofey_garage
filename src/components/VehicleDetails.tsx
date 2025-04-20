@@ -12,21 +12,23 @@ import BuildIcon from '@mui/icons-material/Build';
 import { ServerPromiseResp } from '../types/common';
 import fetchNui from '../utils/fetchNui';
 
-const VehicleDetails = ({ veh }: { veh: GarageItem }) => {
+const VehicleDetails = ({ veh, refreshVehicles }: { veh: GarageItem; refreshVehicles: () => void; }) => {
   const handleTrackVehicle = (plate: string) => {
-    fetchNui<ServerPromiseResp>('npwd:midofey-garage:requestWaypoint', { plate }).then((res) => {
-      console.log(res.data);
-    });
+    fetchNui<ServerPromiseResp>('npwd:midofey-garage:requestWaypoint', { plate }).then(
+      (res) => {
+        refreshVehicles();
+      }
+    );
   };
 
   const handleValetVehicle = (vehicle: GarageItem, owner: string, event: any) => {
-    event.target.style.display = 'none';
-    console.log(event.target.style);
+    event.target.disabled = true;
     fetchNui<ServerPromiseResp>('npwd:midofey-garage:valetVehicle', { vehicle, owner }).then(
       (res) => {
-        console.log(res.data);
-      },
+        refreshVehicles();
+      }
     );
+    
   };
 
   if (!veh || typeof veh !== 'object') {

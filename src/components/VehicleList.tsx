@@ -22,9 +22,10 @@ import VehicleDetails from './VehicleDetails';
 interface VehicleListProps {
   isDarkMode: boolean;
   vehicles: any;
+  refreshVehicles: () => void;
 }
 
-export const VehicleList: React.FC<VehicleListProps> = ({ vehicles, isDarkMode }) => {
+export const VehicleList: React.FC<VehicleListProps> = ({ vehicles, isDarkMode, refreshVehicles }) => {
   const [collapseId, setCollapseId] = useState<string | null>('car');
   const typeIcon = {
     car: {
@@ -123,7 +124,7 @@ export const VehicleList: React.FC<VehicleListProps> = ({ vehicles, isDarkMode }
                         flexDirection: 'column',
                       }}
                     >
-                      <VehicleDetails veh={veh} />
+                      <VehicleDetails veh={veh} refreshVehicles={refreshVehicles} />
                     </AccordionDetails>
                   </Accordion>
                 </ListItem>
